@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!--<android.support.v7.widget.AppCompatImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="@dimen/liste_item_height"-->
+        <!--android:src="@drawable/ic_hesap_gri" />-->
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/ivResim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tint="@android:color/darker_gray"
+            android:tintMode="screen"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/lblBaslik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Kayıtlı bulunamadı."
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblAciklama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Kayıt bulunamadı için açıklama böyle olacak."
+            android:textColor="@android:color/darker_gray" />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Ekle"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/colorPrimary" />
+    </LinearLayout></layout>
