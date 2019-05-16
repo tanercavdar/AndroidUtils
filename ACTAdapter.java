@@ -12,7 +12,7 @@ import android.widget.Filter;
 import java.util.ArrayList;
 import java.util.List;
 
-import tr.com.bracket.aiku360.databinding.RowActpersonelBinding;
+import tr.com.bracket.aiku360.databinding.RowActadapterBinding;
 
 
 public abstract class ACTAdapter<TModel> extends ArrayAdapter<TModel> {
@@ -34,8 +34,7 @@ public abstract class ACTAdapter<TModel> extends ArrayAdapter<TModel> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        RowActpersonelBinding b = DataBindingUtil.getBinding(convertView);
-
+        RowActadapterBinding b = DataBindingUtil.getBinding(convertView);
         if (b == null) {
             LayoutInflater layoutInflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             b = DataBindingUtil.inflate(layoutInflater, _resItemLayout, parent, false);
