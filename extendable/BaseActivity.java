@@ -159,6 +159,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void setDisableBackButton() {
         _disableBackButton = true;
     }
+    
+    public final void closeKeyboard() {
+        InputMethodManager keyboard = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        keyboard.hideSoftInputFromWindow(_setupModel.mainView.getWindowToken(), 0);
+    }
 
     public void addMenuListener(OnCreateMenuListener listener) {
         _onCreateMenuListener = listener;
