@@ -256,6 +256,7 @@ public abstract class FastRVAdapter<TModel> extends RecyclerView.Adapter<FastRVA
                 onDataLoaded();
                 onItemCountChanged(_listFiltered.size());
             }
+              _bRefreshingData = false;
         }else{
             _bRefreshingData = false;
         }
