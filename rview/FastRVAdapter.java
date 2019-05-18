@@ -265,6 +265,10 @@ public abstract class FastRVAdapter<TModel> extends RecyclerView.Adapter<FastRVA
     public List<TModel> getListFiltered() {
         return _listFiltered;
     }
+    
+      public List<TModel> getListOriginal() {
+        return _list;
+    }
 
     public TModel getModelFromHolder(RvHolder holder) {
         return getListFiltered().get(holder.getAdapterPosition());
