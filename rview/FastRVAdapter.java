@@ -159,7 +159,7 @@ public abstract class FastRVAdapter<TModel> extends RecyclerView.Adapter<FastRVA
             }
         }
         notifyDataSetChanged();
-        onDataLoaded();
+        //onDataLoaded();
         onItemCountChanged(_listFiltered.size());
     }
 
