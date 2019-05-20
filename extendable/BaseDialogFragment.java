@@ -63,11 +63,16 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         onSetup(_setupModel, inflater, container);
-        for (int i = 0; i < ((ViewGroup) _setupModel.mainView).getChildCount(); i++) {
-            View v = ((ViewGroup) _setupModel.mainView).getChildAt(i);
-            if (v instanceof Toolbar) {
-                _toolbar = (Toolbar) v;
-                break;
+        View view = _setupModel.mainView.findViewById(R.id.toolbar);
+        if (view != null) {
+            _toolbar = (Toolbar) view;
+        } else {
+            for (int i = 0; i < ((ViewGroup) _setupModel.mainView).getChildCount(); i++) {
+                View v = ((ViewGroup) _setupModel.mainView).getChildAt(i);
+                if (v instanceof Toolbar) {
+                    _toolbar = (Toolbar) v;
+                    break;
+                }
             }
         }
         return _setupModel.mainView;
