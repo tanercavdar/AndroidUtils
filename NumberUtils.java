@@ -18,7 +18,9 @@ public class NumberUtils {
         return dblZero;
     }
 
-    public static String formatDouble(double doubleNumber, Integer... nPrecision) {
+    public static String formatDouble(Double doubleNumber, Integer... nPrecision) {
+        if(doubleNumber==null)
+            doubleNumber = 0.0;
         int nVirgulluHane = nPrecision.length > 0 ? nPrecision[0] : 0;
         String sAddZero = "";
         for (int i = 0; i < nVirgulluHane; i++) {
