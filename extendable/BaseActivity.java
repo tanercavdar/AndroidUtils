@@ -47,6 +47,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         //
         enterAnim();
         onSetup(_setupModel);
+         if (_setupModel.isFullScreen) {
+            try {
+                requestWindowFeature(Window.FEATURE_NO_TITLE);
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } catch (Exception e) {
+            }
+        }
         if (_setupModel.hiddenKeyboard) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         }
@@ -184,6 +191,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         public boolean disableBack;
         public View mainView;
         public boolean hiddenKeyboard;
+        public boolean isFullScreen = true;
 
     }
 
