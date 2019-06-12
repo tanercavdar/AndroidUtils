@@ -29,7 +29,8 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
     private Toolbar _toolbar;
     private String _title = "";
     private DialogFragmentSetupModel _setupModel = new DialogFragmentSetupModel();
-
+    private boolean exitDialog;
+    
     public DialogHelper dialogHelper;
 
     public abstract void onViewCreatedDF(@NonNull View view);
@@ -49,7 +50,13 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
+         Dialog dialog = new Dialog(getActivity(), getTheme()) {
+            @Override
+            public void onBackPressed() {
+              closeDialog();
+            }
+        };
+        //Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.getWindow().setWindowAnimations(android.R.style.Animation_Dialog);
         //dialog.getWindow().setWindowAnimations(R.style.MyTheme_DialogFragmentAnim);
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
@@ -83,7 +90,11 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
         getDialog().setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
-                setCancelable(_setupModel.cancelable);
+                if(_setupModel.enableDoubleBackExit){
+                    setCancelable(false);
+                }else{
+                    setCancelable(_setupModel.cancelable == _setupModel.enableDoubleBackExit);
+                }
                 onViewCreatedDF(view);
                 if (_setupModel.showBackNavigation) {
                     if (_toolbar != null) {
@@ -91,7 +102,7 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
                         _toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                dismiss();
+                               closeDialog();
                             }
                         });
                         _toolbar.setTitle(_title.isEmpty() ? getString(R.string.app_name) : _title);
@@ -141,6 +152,28 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
         public View mainView;
         public boolean cancelable = true;
         public boolean showBackNavigation = true;
+        public boolean enableDoubleBackExit;
+    }
+    
+     private void closeDialog(){
+        if (_setupModel.enableDoubleBackExit) {
+            if (exitDialog) {
+               dismiss();
+                return;
+            }
+            exitDialog = true;
+            ToastUtils.showInfoToast("Çıkmak için tekrar basın !");
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    exitDialog = false;
+                }
+
+            }, 2000);
+        }else{
+            dismiss();
+        }
     }
 
 
