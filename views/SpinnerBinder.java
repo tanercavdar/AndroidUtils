@@ -12,7 +12,7 @@ import java.util.Map;
 public class SpinnerBinder {
 
     private Spinner _spinner;
-    private HashMap<Integer, String> _listKeys;
+    private HashMap<Integer, String> _listKeys =new HashMap<>();
     private Context _context;
     private String _sAddCustomItem;
     private boolean _bAddEmptyValue;
