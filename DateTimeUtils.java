@@ -36,5 +36,14 @@ public class DateTimeUtils {
             return null;
         }
     }
+    
+      public static String dateToString(Date date,  String outputFormat) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(outputFormat);
+            return sdf.format(date);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 }
