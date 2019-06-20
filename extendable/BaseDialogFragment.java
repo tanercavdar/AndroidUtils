@@ -183,6 +183,10 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
         }
     }
     
+    public void setOnDialogResultListener(IDialogResultListener listener) {
+        _resultListener = listener;
+    }
+    
     
     public interface IDialogResultListener {
 
