@@ -30,6 +30,7 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
     private String _title = "";
     private DialogFragmentSetupModel _setupModel = new DialogFragmentSetupModel();
     private boolean exitDialog;
+    private IDialogResultListener _resultListener;
     
     public DialogHelper dialogHelper;
 
@@ -141,6 +142,8 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
         closeKeyboard();
         super.dismiss();
         onCloseDialog();
+        if (_resultListener != null)
+            _resultListener.onResult(dialogResult);
     }
 
     public final void closeKeyboard() {
@@ -174,6 +177,13 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
         }else{
             dismiss();
         }
+    }
+    
+    
+    public interface IDialogResultListener {
+
+        void onResult(String result);
+
     }
 
 
