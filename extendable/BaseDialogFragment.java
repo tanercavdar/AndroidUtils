@@ -31,8 +31,12 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
     private DialogFragmentSetupModel _setupModel = new DialogFragmentSetupModel();
     private boolean exitDialog;
     private IDialogResultListener _resultListener;
+    private String _dialogResult = "";
     
-    public DialogHelper dialogHelper;
+    
+    public static final String DIALOG_RESULT_SAVE = "save";
+    public static final String DIALOG_RESULT_CANCEL = "cancel";
+    public DialogHelper _dialogHelper;
 
     public abstract void onViewCreatedDF(@NonNull View view);
 
@@ -46,7 +50,7 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
         super.onCreate(savedInstanceState);
          setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme);
 
-        dialogHelper = new DialogHelper(getContext());
+        _dialogHelper = new DialogHelper(getContext());
     }
 
     @Override
@@ -143,7 +147,7 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
         super.dismiss();
         onCloseDialog();
         if (_resultListener != null)
-            _resultListener.onResult(dialogResult);
+            _resultListener.onResult(_dialogResult);
     }
 
     public final void closeKeyboard() {
