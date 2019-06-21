@@ -40,5 +40,16 @@ public class NumberUtils {
         }
         return new DecimalFormat("###,###,##0" + (sAddZero.equals("") ? "" : "." + sAddZero)).format(doubleNumber);
     }
+    
+    public static Double editTextToDouble(EditText editText) {
+        return stringToDouble(editText.getText().toString().replace(",", "."));
+    }
+
+    public static Integer editTextToInteger(EditText editText) {
+        if (editText.getText().toString().trim().isEmpty())
+            return 0;
+        else
+            return Integer.valueOf(editText.getText().toString().trim());
+    }
 
 }
