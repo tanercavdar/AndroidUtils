@@ -62,8 +62,7 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
             }
         };
         //super.onCreateDialog(savedInstanceState);
-        //dialog.getWindow().setWindowAnimations(android.R.style.Animation_Dialog);
-        dialog.getWindow().setWindowAnimations(R.style.AppTheme_DialogAnimation);
+        dialog.getWindow().setWindowAnimations(android.R.style.Animation_Dialog);
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         //dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         if (_setupModel.isFullScreen) {
