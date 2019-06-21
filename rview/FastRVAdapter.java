@@ -261,6 +261,7 @@ public abstract class FastRVAdapter<TModel> extends RecyclerView.Adapter<FastRVA
               _bRefreshingData = false;
         }else{
             _bRefreshingData = false;
+            _bShowEmpty = true;
         }
     }
 
