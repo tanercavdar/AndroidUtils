@@ -58,17 +58,21 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
          Dialog dialog = new Dialog(getActivity(), getTheme()) {
             @Override
             public void onBackPressed() {
-              closeDialog();
+                closeDialog();
             }
         };
-        //Dialog dialog = super.onCreateDialog(savedInstanceState);
-        dialog.getWindow().setWindowAnimations(android.R.style.Animation_Dialog);
-        //dialog.getWindow().setWindowAnimations(R.style.MyTheme_DialogFragmentAnim);
+        //super.onCreateDialog(savedInstanceState);
+        //dialog.getWindow().setWindowAnimations(android.R.style.Animation_Dialog);
+        dialog.getWindow().setWindowAnimations(R.style.AppTheme_DialogAnimation);
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        //dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        if (_setupModel.isFullScreen) {
+            try {
+                dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            } catch (Exception e) {
+            }
+        }
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        Log.i(TAG, new Object() {
-        }.getClass().getEnclosingMethod().getName());
         return dialog;
     }
 
@@ -159,6 +163,7 @@ public abstract class BaseDialogFragment extends AppCompatDialogFragment {
         public View mainView;
         public boolean cancelable = true;
         public boolean showBackNavigation = true;
+        public boolean isFullScreen = true;
         public boolean enableDoubleBackExit;
     }
     
