@@ -89,7 +89,7 @@ public class EncryptUtils {
             if (text.equals("")) {
                 return text;
             }
-            String sInput = text + _context.getPackageName();
+            String sInput = text + encryptMD5(_context.getPackageName());
             sInput = encryptBase64(sInput);
             sInput = stringToHex(sInput);
             String sResult = "";
@@ -119,7 +119,7 @@ public class EncryptUtils {
             }
             sResult = hexToString(sResult);
             sResult = descryptBase64(sResult);
-            sResult = sResult.replace(_context.getPackageName(), "");
+            sResult = sResult.replace(encryptMD5(_context.getPackageName()), "");
             return sResult;
         } catch (Exception e) {
             return null;
