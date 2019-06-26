@@ -82,6 +82,10 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
             }
         }
+         if(getSupportFragmentManager().getBackStackEntryCount()>0){
+            getSupportFragmentManager().popBackStack();
+            return;
+        }
         if (_setupModel.disableBack)
             return;
         else {
