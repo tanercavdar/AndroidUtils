@@ -28,7 +28,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private BaseActivitySetupModel _setupModel = new BaseActivitySetupModel();
     private DialogHelper _dialogHelper;
     private Toolbar _toolbar;
-
+  private boolean exitDialog;
+    
     public abstract void onSetup(BaseActivitySetupModel setupModel);
 
     public abstract void onViewCreated();
@@ -36,14 +37,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //db = new KomisyoncuDB(this);
-//
+
         _dialogHelper = new DialogHelper(this);
-        //firebaseHelper = new FirebaseDataHelper(this);
-//
-        //generalManager = new GeneralManagerFire(firebaseHelper);
-        //bl = new BL(this, generalManager);
-        //ftpHelper = new FTPHelper(bl.getRemoteFTPLoginModel(), dialogHelper);
         //
         enterAnim();
         onSetup(_setupModel);
@@ -77,10 +72,40 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+         List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+        boolean comeBack = true;
+        for (Fragment f : fragmentList) {
+            if (f instanceof BaseSupportV4Fragment) {
+                comeBack = ((BaseSupportV4Fragment) f).onBackPressed();
+                if (comeBack == false) {
+                    break;
+                }
+            }
+        }
         if (_setupModel.disableBack)
             return;
-        else
-            super.onBackPressed();
+        else {
+            if (comeBack) {
+                if (_setupModel.enableDoubleBackExit) {
+                    if (exitDialog) {
+                        super.onBackPressed();
+                        return;
+                    }
+                    exitDialog = true;
+                    ToastUtils.showInfoToast("Çıkmak için tekrar basın !");
+                    new Handler().postDelayed(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            exitDialog = false;
+                        }
+
+                    }, 2000);
+                }else{
+                    super.onBackPressed();
+                }
+            }
+        }
     }
 
     @Override
@@ -192,6 +217,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         public View mainView;
         public boolean hiddenKeyboard;
         public boolean isFullScreen = true;
+          public boolean enableDoubleBackExit;
 
     }
 
