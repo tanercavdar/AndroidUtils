@@ -62,7 +62,10 @@ public abstract class BaseSupportV4Fragment extends Fragment {
     public void addMenuListener(OnCreateMenuListener listener) {
         _onCreateMenuListener = listener;
     }
-
+    
+ public boolean onBackPressed(){
+        return  true;
+    }
 
     public final void closeKeyboard() {
         InputMethodManager keyboard = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
