@@ -36,19 +36,19 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        _dialogHelper = new DialogHelper(this);
-        //
-        enterAnim();
-        onSetup(_setupModel);
-         if (_setupModel.isFullScreen) {
+        if (_setupModel.isFullScreen) {
             try {
                 requestWindowFeature(Window.FEATURE_NO_TITLE);
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             } catch (Exception e) {
             }
         }
+        super.onCreate(savedInstanceState);
+        _dialogHelper = new DialogHelper(this);
+        //
+        enterAnim();
+        onSetup(_setupModel);
+         
         if (_setupModel.hiddenKeyboard) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         }
